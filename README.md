@@ -30,3 +30,8 @@ So I can add them to the main repository as well as maintain some orphan package
 - [Fedora: Installing Packager Tools](https://docs.fedoraproject.org/en-US/package-maintainers/Installing_Packager_Tools/)
 - [Fedora: Joining the Package Maintainers](https://docs.fedoraproject.org/en-US/package-maintainers/Joining_the_Package_Maintainers/)
 - [Fedora: Policy for Orphan and Retired Packages](https://docs.fedoraproject.org/en-US/fesco/Policy_for_orphan_and_retired_packages/)
+- [Fedora: Fedora Packaging Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/)
+- [Fedora: Versioning Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/Versioning/)
+- [Fedora: Using the %autorelease Macro](https://docs.pagure.org/fedora-infra.rpmautospec/autorelease.html)
+- [Fedora: Copr command line interface](https://developer.fedoraproject.org/deployment/copr/copr-cli.html)
+- [RPM %autosetup description](https://rpm-software-management.github.io/rpm/manual/autosetup.html)
