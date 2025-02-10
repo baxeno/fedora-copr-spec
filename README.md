@@ -17,3 +17,6 @@ So I can add them to the main repository as well as maintain some orphan package
 - [Labgrid installation](https://labgrid.readthedocs.io/en/latest/getting_started.html#installation)
 - [Labgrid upstream git](https://github.com/labgrid-project/labgrid)
 - [Microcom upstream git](https://github.com/pengutronix/microcom)
+- [Fedora: Installing Packager Tools](https://docs.fedoraproject.org/en-US/package-maintainers/Installing_Packager_Tools/)
+- [Fedora: Joining the Package Maintainers](https://docs.fedoraproject.org/en-US/package-maintainers/Joining_the_Package_Maintainers/)
+- [Fedora: Policy for Orphan and Retired Packages](https://docs.fedoraproject.org/en-US/fesco/Policy_for_orphan_and_retired_packages/)
