@@ -12,6 +12,7 @@ So I can add them to the main repository as well as maintain some orphan package
   - So currently it is not very straight forward to also provide Fedora installation steps 🙁
 
 - [Fedora COPR bax/rauc](https://copr.fedorainfracloud.org/coprs/bax/rauc/) needed for handling RAUC upgrade bundles for embedded Linux devices.
+  - [rauc.spec](rauc.spec)
   - RAUC cli tool can be very useful after an upgrade bundle has been build but not yet released to the wild 🐧
   - resign bundle with new digital signature, e.g. developer signed vs. official signed.
   - inspect bundle meta data or files inside.
