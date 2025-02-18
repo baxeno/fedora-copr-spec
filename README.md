@@ -18,6 +18,11 @@ So I can add them to the main repository as well as maintain some orphan package
   - inspect bundle meta data or files inside.
   - Service is only needed on target device.
   - Fedora is missing from the list of development/build hosts (Arch, Debian, Ubuntu, NixOS already have package) 🙁
+- [Fedora COPR bax/uuu](https://copr.fedorainfracloud.org/coprs/bax/uuu/) needed for manufacturing of embedded Linux devices with NXP i.MX SoC.
+  - [uuu.spec](uuu.spec)
+  - UUU (Universal Update Utility), the next evolution of MFGTools, also known as MFGTools v3.
+  - Use i.MX USB serial download mode to load Barebox or U-Boot image.
+  - Barebox can then expose emmc as mass storage via usb gadget device.
 
 ## References
 
@@ -27,6 +32,7 @@ So I can add them to the main repository as well as maintain some orphan package
 - [Microcom upstream git](https://github.com/pengutronix/microcom)
 - [RAUC Safe and Secure OTA Updates for Embedded Linux!](https://rauc.io/)
 - [RAUC upstream git](https://github.com/rauc/rauc)
+- [UUU upstream git](https://github.com/nxp-imx/mfgtools)
 - [Fedora: Installing Packager Tools](https://docs.fedoraproject.org/en-US/package-maintainers/Installing_Packager_Tools/)
 - [Fedora: Joining the Package Maintainers](https://docs.fedoraproject.org/en-US/package-maintainers/Joining_the_Package_Maintainers/)
 - [Fedora: Policy for Orphan and Retired Packages](https://docs.fedoraproject.org/en-US/fesco/Policy_for_orphan_and_retired_packages/)
