@@ -1,0 +1,10 @@
+--- sdps.h.org	2025-03-01 15:10:10.251663589 +0100
++++ sdps.h	2025-03-01 15:10:34.266506164 +0100
+@@ -30,6 +30,7 @@
+ */
+ 
+ #include "cmd.h"
++#include <cstdint>
+ 
+ class SDPSCmd : public CmdBase
+ {
