@@ -6,6 +6,7 @@ Summary:        Universal Update Utility
 License:        BSD-3-Clause
 URL:            https://github.com/nxp-imx/mfgtools/wiki
 Source0:        https://github.com/nxp-imx/mfgtools/releases/download/%{version}/uuu_source-%{version}.tar.gz
+Patch0:         0001-libuuu-sdps-fix-gcc15-compile-errors.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-g++
