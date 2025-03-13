@@ -1,5 +1,5 @@
 Name:           rauc
-Version:        1.11.3
+Version:        1.13
 Release:        %autorelease
 Summary:        Safe and secure software updates for embedded Linux
 
@@ -65,5 +65,8 @@ Service is not installed as that is only needed on device.
 /usr/share/man/man1/rauc.1.gz
 
 %changelog
+* Thu Mar 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Version bumped from 1.11.3 to 1.13
+
 * Mon Feb 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Initial RPM release with test disabled as 6 fail and 17 ok
