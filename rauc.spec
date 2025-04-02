@@ -1,5 +1,5 @@
 Name:           rauc
-Version:        1.13
+Version:        1.14
 Release:        %autorelease
 Summary:        Safe and secure software updates for embedded Linux
 
@@ -49,6 +49,10 @@ Service is not installed as that is only needed on device.
 /usr/share/man/man1/rauc.1.gz
 
 %changelog
+* Wed Apr 2 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Version bumped from 1.13 to 1.14
+- Remove test failure comment from spec file
+
 * Thu Mar 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Version bumped from 1.11.3 to 1.13
 
