@@ -6,6 +6,7 @@ Summary:        Safe and secure software updates for embedded Linux
 License:        LGPL-2.1-only
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Patch0:         rauc_no_openssl_engine.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc
@@ -13,7 +14,6 @@ BuildRequires:  glib2-devel
 BuildRequires:  json-glib-devel
 BuildRequires:  dbus-devel
 BuildRequires:  openssl-devel
-BuildRequires:  openssl-devel-engine
 BuildRequires:  libcurl-devel
 BuildRequires:  libfdisk-devel
 BuildRequires:  libnl3-devel
@@ -27,7 +27,9 @@ inspect and modify update artifacts for your device.
 Service is not installed as that is only needed on device.
 
 %prep
-%autosetup -v
+%autosetup -v -N
+cd src
+%patch -P 0 -b .orig
 
 %build
 %meson \
@@ -49,6 +51,9 @@ Service is not installed as that is only needed on device.
 /usr/share/man/man1/rauc.1.gz
 
 %changelog
+* Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Add patch that remove OpenSSL engine support
+
 * Wed Apr 2 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Version bumped from 1.13 to 1.14
 - Remove test failure comment from spec file
