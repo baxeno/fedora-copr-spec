@@ -19,6 +19,12 @@ BuildRequires:  libfdisk-devel
 BuildRequires:  libnl3-devel
 BuildRequires:  systemd-devel
 
+# Test requirements
+BuildRequires:  e2fsprogs
+BuildRequires:  squashfs-tools
+BuildRequires:  dbus-daemon
+BuildRequires:  fakeroot
+
 %description
 RAUC is a lightweight update client that runs on your Embedded Linux device
 and reliably controls the procedure of updating your device with a new firmware
@@ -36,12 +42,16 @@ cd src
         -Dfuzzing=false \
         -Dhtmldocs=false \
         -Dservice=false \
-        -Dtests=false
+        -Dstreaming=false \
+        -Dnetwork=false
 
 %meson_build
 
 %install
 %meson_install
+
+%check
+%meson_test
 
 %files
 /usr/bin/rauc
@@ -51,6 +61,9 @@ cd src
 /usr/share/man/man1/rauc.1.gz
 
 %changelog
+* Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Enable tests and disable network and streaming
+
 * Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Add patch that remove OpenSSL engine support
 
