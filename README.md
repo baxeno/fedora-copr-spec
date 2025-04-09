@@ -19,35 +19,14 @@ So I can add them to the main repository as well as maintain some orphan package
   - Service is only needed on target device.
   - Fedora is missing from the list of development/build hosts (Arch, Debian, Ubuntu, NixOS already have package) 🙁
 
-**Test failures if enabling tests for RAUC:**
-
-- Failed to run mksquashfs: Failed to execute child process ?mksquashfs? (No such file or directory) (g-exec-error-quark, 8)
-- Failed to spawn child process ?dbus-daemon? (No such file or directory) (g-exec-error-quark, 19)
-- Making filesystem failed: Failed to execute child process ?/sbin/mkfs.ext4? (No such file or directory) FAIL
-- Transfer failed: Could not resolve host: rauc.io  (g-io-error-quark, 0) FAIL
-
 ```
 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-22/23 nbd               SKIP             0.01s   0 subtests passed
-23/23 boot_switch       SKIP             0.01s   0 subtests passed
-
-Summary of Failures:
-
- 4/23 bundle            ERROR            0.12s   killed by signal 6 SIGABRT
-11/23 install           ERROR            0.22s   killed by signal 5 SIGTRAP
-14/23 service           ERROR            0.09s   killed by signal 6 SIGABRT
-19/23 update_handler    ERROR            0.15s   killed by signal 5 SIGTRAP
-21/23 network           ERROR            0.09s   killed by signal 6 SIGABRT
-
-Ok:                 15
+Ok:                 35
 Expected Fail:      0
-Fail:               5
+Fail:               0
 Unexpected Pass:    0
 Skipped:            3
 Timeout:            0
-
-%check
-%meson_test
 ```
 
 - [Fedora COPR bax/uuu](https://copr.fedorainfracloud.org/coprs/bax/uuu/) needed for manufacturing of embedded Linux devices with NXP i.MX SoC.
