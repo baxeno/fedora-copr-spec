@@ -1,0 +1,11 @@
+--- grub.c.orig	2025-04-09 22:10:09.326873332 +0200
++++ grub.c	2025-04-09 22:10:12.448882276 +0200
+@@ -3,7 +3,7 @@
+ #include "context.h"
+ #include "utils.h"
+ 
+-#define GRUB_EDITENV "grub-editenv"
++#define GRUB_EDITENV "grub2-editenv"
+ 
+ static gboolean grub_env_get(const gchar *key, GString **value, GError **error)
+ {

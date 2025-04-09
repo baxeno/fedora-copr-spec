@@ -7,6 +7,8 @@ License:        LGPL-2.1-only
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Patch0:         rauc_no_openssl_engine.patch
+Patch1:         rauc_bootloader_grub_editenv.patch
+Patch2:         rauc_grub_editenv.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc
@@ -24,6 +26,11 @@ BuildRequires:  e2fsprogs
 BuildRequires:  squashfs-tools
 BuildRequires:  dbus-daemon
 BuildRequires:  fakeroot
+BuildRequires:  python3-pytest
+BuildRequires:  python3-dasbus
+BuildRequires:  python3-requests
+BuildRequires:  grub2-tools-minimal
+BuildRequires:  openssl
 
 %description
 RAUC is a lightweight update client that runs on your Embedded Linux device
@@ -36,6 +43,12 @@ Service is not installed as that is only needed on device.
 %autosetup -v -N
 cd src
 %patch -P 0 -b .orig
+cd bootloaders
+%patch -P 1 -b .orig
+cd ../../test
+%patch -P 2 -b .orig
+cd bin
+ln -sf grub-editenv grub2-editenv
 
 %build
 %meson \
@@ -62,7 +75,9 @@ cd src
 
 %changelog
 * Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
-- Enable tests and disable network and streaming
+- Disable network and streaming
+- Enable tests and add extra dependencies
+- Tests expect Debian host with grub-editenv, called grub2-editenv on Fedora.
 
 * Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Add patch that remove OpenSSL engine support
