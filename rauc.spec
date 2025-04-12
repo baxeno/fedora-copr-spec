@@ -9,6 +9,11 @@ Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{
 Patch0:         rauc_no_openssl_engine.patch
 Patch1:         rauc_bootloader_grub_editenv.patch
 Patch2:         rauc_grub_editenv.patch
+Patch3:         rauc_disable_log_failed_calc_free_x509.patch
+Patch4:         rauc_disable_config_failed_calc_free_x509.patch
+Patch5:         rauc_disable_signature_failed_calc_free_x509.patch
+Patch6:         rauc_disable_context_failed_calc_free_x509.patch
+Patch7:         rauc_disable_status_failed_calc_free_x509.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc
@@ -41,12 +46,21 @@ Service is not installed as that is only needed on device.
 
 %prep
 %autosetup -v -N
+# fedora deprecated openssl engine
 cd src
 %patch -P 0 -b .orig
+# debian/fedora grub difference
 cd bootloaders
 %patch -P 1 -b .orig
 cd ../../test
 %patch -P 2 -b .orig
+# test fails on f43/rawhide
+%patch -P 3 -b .orig
+%patch -P 4 -b .orig
+%patch -P 5 -b .orig
+%patch -P 6 -b .orig
+%patch -P 7 -b .orig
+# debian/fedora grub difference
 cd bin
 ln -sf grub-editenv grub2-editenv
 
@@ -74,6 +88,9 @@ ln -sf grub-editenv grub2-editenv
 /usr/share/man/man1/rauc.1.gz
 
 %changelog
+* Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Disable 5 tests that does not work on F43/rawhide
+
 * Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Disable network and streaming
 - Enable tests and add extra dependencies

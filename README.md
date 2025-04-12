@@ -19,11 +19,33 @@ So I can add them to the main repository as well as maintain some orphan package
   - Service is only needed on target device.
   - Fedora is missing from the list of development/build hosts (Arch, Debian, Ubuntu, NixOS already have package) 🙁
 
+Fedora 40, 41, 42:
+
 ```
 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 Ok:                 35
 Expected Fail:      0
 Fail:               0
+Unexpected Pass:    0
+Skipped:            3
+Timeout:            0
+```
+
+Fedora 43 (rawhide):
+
+```
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+Summary of Failures:
+
+ 6/38 config_file              ERROR            0.15s   killed by signal 5 SIGTRAP
+ 7/38 context                  ERROR            0.16s   killed by signal 5 SIGTRAP
+ 9/38 event_log                ERROR            0.14s   killed by signal 5 SIGTRAP
+15/38 signature                ERROR            0.08s   killed by signal 5 SIGTRAP
+18/38 status_file              ERROR            0.13s   killed by signal 5 SIGTRAP
+
+Ok:                 30
+Expected Fail:      0
+Fail:               5
 Unexpected Pass:    0
 Skipped:            3
 Timeout:            0
