@@ -6,9 +6,19 @@ Summary:        Safe and secure software updates for embedded Linux
 License:        LGPL-2.1-only
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+
+# https://github.com/rauc/rauc/issues/1688
+# https://github.com/rauc/rauc/pull/1690
 Patch0:         rauc_no_openssl_engine.patch
+
+# Debian: grub_editenv
+# Fedora: grub2_editenv
+# Upstream work has not yet begun
 Patch1:         rauc_bootloader_grub_editenv.patch
 Patch2:         rauc_grub_editenv.patch
+
+# 5 tests does not work on F43/Rawhide due to OpenSSL x509 issue
+# Uptream work has not yet begun
 Patch3:         rauc_disable_log_failed_calc_free_x509.patch
 Patch4:         rauc_disable_config_failed_calc_free_x509.patch
 Patch5:         rauc_disable_signature_failed_calc_free_x509.patch
@@ -81,15 +91,16 @@ ln -sf grub-editenv grub2-editenv
 %meson_test
 
 %files
-/usr/bin/rauc
-/usr/share/dbus-1/interfaces/de.pengutronix.rauc.Installer.xml
+%{_bindir}/rauc
+%{_datadir}/dbus-1/interfaces/de.pengutronix.rauc.Installer.xml
 %license COPYING
-%doc README.rst
-/usr/share/man/man1/rauc.1.gz
+%doc README.rst CHANGES
+%{_mandir}/man1/rauc.1.*
 
 %changelog
 * Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Disable 5 tests that does not work on F43/rawhide
+- Update files section with macros and add patch comments
 
 * Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Disable network and streaming
