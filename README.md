@@ -57,6 +57,20 @@ Timeout:            0
   - Use i.MX USB serial download mode to load Barebox or U-Boot image.
   - Barebox can then expose emmc as mass storage via usb gadget device.
 
+## Local builds
+
+Example:
+
+```bash
+cd rpmbuild
+cp ../git/fedora-copr-spec/rauc* .
+spectool -g rauc.spec
+fedpkg --release f42 mockbuild
+fedpkg --release f42 lint
+fedpkg --release f43 mockbuild
+fedpkg --release f43 lint
+```
+
 ## References
 
 - [Labgrid documentation](https://labgrid.readthedocs.io/en/latest/index.html)
