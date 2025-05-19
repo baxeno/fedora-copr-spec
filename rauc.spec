@@ -9,43 +9,46 @@ Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{
 
 # https://github.com/rauc/rauc/issues/1688
 # https://github.com/rauc/rauc/pull/1690
-Patch0:         rauc_no_openssl_engine.patch
+# Upstream: PR has landed and will be included in release 1.15
+Patch0:         rauc_patch0_no_openssl_engine.patch
 
 # Debian: grub_editenv
 # Fedora: grub2_editenv
-# Upstream work has not yet begun
-Patch1:         rauc_bootloader_grub_editenv.patch
-Patch2:         rauc_grub_editenv.patch
+# Upstream: Work has not yet begun
+Patch1:         rauc_patch1_grub_editenv_debian_compat_fix.patch
 
 # 5 tests does not work on F43/Rawhide due to OpenSSL x509 issue
-# Uptream work has not yet begun
-Patch3:         rauc_disable_log_failed_calc_free_x509.patch
-Patch4:         rauc_disable_config_failed_calc_free_x509.patch
-Patch5:         rauc_disable_signature_failed_calc_free_x509.patch
-Patch6:         rauc_disable_context_failed_calc_free_x509.patch
-Patch7:         rauc_disable_status_failed_calc_free_x509.patch
+# Tests work on F42 and lower.
+# Upstream: Work has not yet begun
+Patch2:         rauc_patch2_disable_openssl_x509_issue_on_f43.patch
+
+# RPM lint E: incorrect-fsf-address
+# Upstream: Fixed in commit "fe86f27 COPYING: remove old FSF postal address"
+#           and will be included in release 1.15
+# https://github.com/rauc/rauc/commit/fe86f277258dfe96d0f9ac9bfa930733598d7160
 
 BuildRequires:  meson
 BuildRequires:  gcc
+BuildRequires:  dbus-common
+BuildRequires:  dbus-devel
 BuildRequires:  glib2-devel
 BuildRequires:  json-glib-devel
-BuildRequires:  dbus-devel
-BuildRequires:  openssl-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libfdisk-devel
 BuildRequires:  libnl3-devel
+BuildRequires:  openssl-devel
 BuildRequires:  systemd-devel
 
 # Test requirements
-BuildRequires:  e2fsprogs
-BuildRequires:  squashfs-tools
 BuildRequires:  dbus-daemon
+BuildRequires:  e2fsprogs
 BuildRequires:  fakeroot
+BuildRequires:  grub2-tools-minimal
+BuildRequires:  openssl
 BuildRequires:  python3-pytest
 BuildRequires:  python3-dasbus
 BuildRequires:  python3-requests
-BuildRequires:  grub2-tools-minimal
-BuildRequires:  openssl
+BuildRequires:  squashfs-tools
 
 %description
 RAUC is a lightweight update client that runs on your Embedded Linux device
@@ -56,22 +59,14 @@ Service is not installed as that is only needed on device.
 
 %prep
 %autosetup -v -N
-# fedora deprecated openssl engine
-cd src
+# Fedora deprecated OpenSSL Engine
 %patch -P 0 -b .orig
-# debian/fedora grub difference
-cd bootloaders
+# Debian vs. Fedora grub2 packaging difference
 %patch -P 1 -b .orig
-cd ../../test
+# OpenSSL X509 test fails on F43/Rawhide (work on F42 and earlier)
 %patch -P 2 -b .orig
-# test fails on f43/rawhide
-%patch -P 3 -b .orig
-%patch -P 4 -b .orig
-%patch -P 5 -b .orig
-%patch -P 6 -b .orig
-%patch -P 7 -b .orig
-# debian/fedora grub difference
-cd bin
+# Debian vs. Fedora grub2 packaging difference
+cd test/bin
 ln -sf grub-editenv grub2-editenv
 
 %build
@@ -98,6 +93,11 @@ ln -sf grub-editenv grub2-editenv
 %{_mandir}/man1/rauc.1.*
 
 %changelog
+* Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Add dbus-common dependency as xml is installed in dbus-1 directory
+- Cleanup patches into 3 logical changes and update upstream status
+- Add upstream status of RPM lint incorrect-fsf-address error
+
 * Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Disable 5 tests that does not work on F43/rawhide
 - Update files section with macros and add patch comments

@@ -1,5 +1,5 @@
---- signature.c.orig	2025-04-03 21:27:56.519514909 +0200
-+++ signature.c	2025-04-03 21:33:35.030236713 +0200
+--- src/signature.c.orig	2025-04-03 21:27:56.519514909 +0200
++++ src/signature.c	2025-04-03 21:33:35.030236713 +0200
 @@ -5,7 +5,9 @@
  #include <openssl/evp.h>
  #include <openssl/pem.h>
