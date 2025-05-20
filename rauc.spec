@@ -3,6 +3,8 @@ Version:        1.14
 Release:        %autorelease
 Summary:        Safe and secure software updates for embedded Linux
 
+# License issue in de.pengutronix.rauc.Installer.xml
+# https://github.com/rauc/rauc/issues/1713
 License:        LGPL-2.1-only
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
@@ -26,6 +28,9 @@ Patch2:         rauc_patch2_disable_openssl_x509_issue_on_f43.patch
 # Upstream: Fixed in commit "fe86f27 COPYING: remove old FSF postal address"
 #           and will be included in release 1.15
 # https://github.com/rauc/rauc/commit/fe86f277258dfe96d0f9ac9bfa930733598d7160
+
+# Exclude architectures that does not have grub2-tools-minimal package
+ExcludeArch:    s390 s390x i686
 
 BuildRequires:  meson
 BuildRequires:  gcc
@@ -93,6 +98,10 @@ ln -sf grub-editenv grub2-editenv
 %{_mandir}/man1/rauc.1.*
 
 %changelog
+* Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+- Exclude some architectures that does not have grub2-tools-minimal package
+- Add upstream xml file license issue link
+
 * Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Add dbus-common dependency as xml is installed in dbus-1 directory
 - Cleanup patches into 3 logical changes and update upstream status
@@ -105,7 +114,7 @@ ln -sf grub-editenv grub2-editenv
 * Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Disable network and streaming
 - Enable tests and add extra dependencies
-- Tests expect Debian host with grub-editenv, called grub2-editenv on Fedora.
+- Tests expect Debian host with grub-editenv, called grub2-editenv on Fedora
 
 * Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
 - Add patch that remove OpenSSL engine support
