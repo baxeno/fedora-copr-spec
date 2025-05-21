@@ -98,33 +98,33 @@ ln -sf grub-editenv grub2-editenv
 %{_mandir}/man1/rauc.1.*
 
 %changelog
-* Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Exclude some architectures that does not have grub2-tools-minimal package
 - Add upstream xml file license issue link
 
-* Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Add dbus-common dependency as xml is installed in dbus-1 directory
 - Cleanup patches into 3 logical changes and update upstream status
 - Add upstream status of RPM lint incorrect-fsf-address error
 
-* Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Disable 5 tests that does not work on F43/rawhide
 - Update files section with macros and add patch comments
 
-* Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Disable network and streaming
 - Enable tests and add extra dependencies
 - Tests expect Debian host with grub-editenv, called grub2-editenv on Fedora
 
-* Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Add patch that remove OpenSSL engine support
 
-* Wed Apr 2 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Wed Apr 2 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Version bumped from 1.13 to 1.14
 - Remove test failure comment from spec file
 
-* Thu Mar 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Thu Mar 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.13-1
 - Version bumped from 1.11.3 to 1.13
 
-* Mon Feb 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com>
+* Mon Feb 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.11.3-1
 - Initial RPM release with test disabled as 6 fail and 17 ok
