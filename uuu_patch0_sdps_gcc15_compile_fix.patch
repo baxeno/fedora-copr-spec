@@ -1,0 +1,10 @@
+--- libuuu/sdps.h.orig	2025-03-13 22:17:08.075862405 +0100
++++ libuuu/sdps.h	2025-03-13 22:16:21.601477965 +0100
+@@ -30,6 +30,7 @@
+ */
+ 
+ #include "cmd.h"
++#include <cstdint>
+ 
+ class SDPSCmd : public CmdBase
+ {
