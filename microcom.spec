@@ -14,7 +14,7 @@ BuildRequires:  readline-devel
 
 %description
 Microcom is a minimalistic terminal program for accessing devices (e.g.
-switches) via a serial connection.  It features connection via RS232
+switches) via a serial connection. It features connection via RS232
 serial interfaces (including setting of transfer-rates) as well as in
 "telnet mode" as specified in rfc2217.
 
