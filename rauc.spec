@@ -11,6 +11,7 @@ License:        LGPL-2.1-only AND CC0-1.0
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 
+# Deprecated OpenSSL engine support
 # https://github.com/rauc/rauc/issues/1688
 # https://github.com/rauc/rauc/pull/1690
 # Upstream: PR has landed and will be included in release 1.15
@@ -102,7 +103,7 @@ ln -sf grub-editenv grub2-editenv
 %{_mandir}/man1/rauc.1.*
 
 %changelog
-* Web May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Change dbus-common dependency from BuildRequires to Requires
 - Update upstream license issue and update license information
 
