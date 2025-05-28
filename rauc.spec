@@ -128,30 +128,30 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
-* Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-7
 - Change dbus-common dependency from BuildRequires to Requires
 - Update upstream license issue and update license information
 - Generate docbook for yelp or khelpcenter
 
-* Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-6
 - Exclude some architectures that does not have grub2-tools-minimal package
 - Add upstream xml file license issue link
 
-* Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Mon May 19 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-5
 - Add dbus-common dependency as xml is installed in dbus-1 directory
 - Cleanup patches into 3 logical changes and update upstream status
 - Add upstream status of RPM lint incorrect-fsf-address error
 
-* Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Sat Apr 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-4
 - Disable 5 tests that does not work on F43/rawhide
 - Update files section with macros and add patch comments
 
-* Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Wed Apr 9 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-3
 - Disable network and streaming
 - Enable tests and add extra dependencies
 - Tests expect Debian host with grub-editenv, called grub2-editenv on Fedora
 
-* Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+* Thu Apr 3 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-2
 - Add patch that remove OpenSSL engine support
 
 * Wed Apr 2 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
