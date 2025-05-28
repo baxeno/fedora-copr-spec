@@ -35,6 +35,7 @@ Patch2:         rauc_patch2_disable_openssl_x509_issue_on_f43.patch
 # Exclude architectures that does not have grub2-tools-minimal package
 ExcludeArch:    s390 s390x i686
 
+# Tool requirements
 BuildRequires:  meson
 BuildRequires:  gcc
 BuildRequires:  dbus-devel
@@ -59,6 +60,13 @@ BuildRequires:  python3-pytest
 BuildRequires:  python3-dasbus
 BuildRequires:  python3-requests
 BuildRequires:  squashfs-tools
+
+# Documentation requirements
+BuildRequires:  make
+BuildRequires:  texinfo
+BuildRequires:  python3dist(docutils)
+BuildRequires:  python3dist(sphinx)
+BuildRequires:  python3-sphinx_rtd_theme
 
 %description
 RAUC is a lightweight update client that runs on your Embedded Linux device
@@ -89,8 +97,21 @@ ln -sf grub-editenv grub2-editenv
 
 %meson_build
 
+# docbook for yelp or khelpcenter
+pushd docs
+sphinx-build . texinfo -b texinfo
+pushd texinfo
+makeinfo --docbook %{name}.texi
+popd
+popd
+
 %install
 %meson_install
+
+# docbook for yelp or khelpcenter
+mkdir -p %{buildroot}%{_datadir}/help/en/%{name}
+install -m644 docs/texinfo/%{name}.xml %{buildroot}%{_datadir}/help/en/%{name}
+cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 
 %check
 %meson_test
@@ -102,10 +123,15 @@ ln -sf grub-editenv grub2-editenv
 %doc README.rst CHANGES
 %{_mandir}/man1/rauc.1.*
 
+# docbook for yelp or khelpcenter
+%dir %{_datadir}/help/en
+%lang(en) %{_datadir}/help/en/%{name}
+
 %changelog
 * Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Change dbus-common dependency from BuildRequires to Requires
 - Update upstream license issue and update license information
+- Generate docbook for yelp or khelpcenter
 
 * Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Exclude some architectures that does not have grub2-tools-minimal package
