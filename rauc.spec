@@ -34,7 +34,6 @@ ExcludeArch:    s390 s390x i686
 
 BuildRequires:  meson
 BuildRequires:  gcc
-BuildRequires:  dbus-common
 BuildRequires:  dbus-devel
 BuildRequires:  glib2-devel
 BuildRequires:  json-glib-devel
@@ -43,6 +42,9 @@ BuildRequires:  libfdisk-devel
 BuildRequires:  libnl3-devel
 BuildRequires:  openssl-devel
 BuildRequires:  systemd-devel
+
+# Make sure /usr/share/dbus-1/interfaces and /usr/share/dbus-1 are owned.
+Requires:  dbus-common
 
 # Test requirements
 BuildRequires:  dbus-daemon
@@ -98,6 +100,9 @@ ln -sf grub-editenv grub2-editenv
 %{_mandir}/man1/rauc.1.*
 
 %changelog
+* Web May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
+- Change dbus-common dependency from BuildRequires to Requires
+
 * Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Exclude some architectures that does not have grub2-tools-minimal package
 - Add upstream xml file license issue link
