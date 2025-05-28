@@ -1,6 +1,6 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease
+Release:        %autorelease -b 7
 Summary:        Safe and secure software updates for embedded Linux
 
 # License issue in de.pengutronix.rauc.Installer.xml
