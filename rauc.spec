@@ -5,7 +5,9 @@ Summary:        Safe and secure software updates for embedded Linux
 
 # License issue in de.pengutronix.rauc.Installer.xml
 # https://github.com/rauc/rauc/issues/1713
-License:        LGPL-2.1-only
+# https://github.com/rauc/rauc/pull/1720
+# Upstream: PR is open and expected to be included in release 1.15
+License:        LGPL-2.1-only AND CC0-1.0
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 
@@ -102,6 +104,7 @@ ln -sf grub-editenv grub2-editenv
 %changelog
 * Web May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Change dbus-common dependency from BuildRequires to Requires
+- Update upstream license issue and update license information
 
 * Tue May 20 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-1
 - Exclude some architectures that does not have grub2-tools-minimal package
