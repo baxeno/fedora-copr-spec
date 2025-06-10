@@ -1,6 +1,6 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease -b 7
+Release:        %autorelease -b 8
 Summary:        Safe and secure software updates for embedded Linux
 
 # License issue in de.pengutronix.rauc.Installer.xml
@@ -61,12 +61,21 @@ BuildRequires:  python3-dasbus
 BuildRequires:  python3-requests
 BuildRequires:  squashfs-tools
 
+%package doc
+Summary: RAUC documentation
+
+# rauc-doc does not contain any binaries
+BuildArch: noarch
+
 # Documentation requirements
 BuildRequires:  make
 BuildRequires:  texinfo
 BuildRequires:  python3dist(docutils)
 BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3-sphinx_rtd_theme
+
+%description doc
+Documentation for RAUC.
 
 %description
 RAUC is a lightweight update client that runs on your Embedded Linux device
@@ -124,10 +133,14 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %{_mandir}/man1/rauc.1.*
 
 # docbook for yelp or khelpcenter
+%files doc
 %dir %{_datadir}/help/en
-%lang(en) %{_datadir}/help/en/%{name}
+%doc %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
+* Tue Jun 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-8
+- Split large documentation into seperate doc package
+
 * Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-7
 - Change dbus-common dependency from BuildRequires to Requires
 - Update upstream license issue and update license information
