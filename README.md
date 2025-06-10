@@ -90,5 +90,6 @@ fedpkg --release f43 lint
 - [Fedora: Versioning Guidelines](https://docs.fedoraproject.org/en-US/packaging-guidelines/Versioning/)
 - [Fedora: Using the %autorelease Macro](https://docs.pagure.org/fedora-infra.rpmautospec/autorelease.html)
 - [Fedora: Copr command line interface](https://developer.fedoraproject.org/deployment/copr/copr-cli.html)
+- [Fedora: Common Rpmlint issues](https://docs.fedoraproject.org/en-US/package-maintainers/CommonRpmlintIssues/)
 - [RPM %autosetup description](https://rpm-software-management.github.io/rpm/manual/autosetup.html)
 
