@@ -1,6 +1,6 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease -b 8
+Release:        %autorelease -b 9
 Summary:        Safe and secure software updates for embedded Linux
 
 # License issue in de.pengutronix.rauc.Installer.xml
@@ -49,6 +49,8 @@ BuildRequires:  systemd-devel
 
 # Make sure /usr/share/dbus-1/interfaces and /usr/share/dbus-1 are owned.
 Requires:  dbus-common
+# Weak dependency on documentation
+Recommends:  rauc-doc
 
 # Test requirements
 BuildRequires:  dbus-daemon
@@ -138,8 +140,11 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %doc %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
+* Tue Jun 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-9
+- Recommend installing separate doc package
+
 * Tue Jun 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-8
-- Split large documentation into seperate doc package
+- Split large documentation into separate doc package
 
 * Wed May 28 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-7
 - Change dbus-common dependency from BuildRequires to Requires
