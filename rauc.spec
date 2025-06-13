@@ -1,6 +1,6 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease -b 9
+Release:        %autorelease -b 10
 Summary:        Safe and secure software updates for embedded Linux
 
 # License issue in de.pengutronix.rauc.Installer.xml
@@ -48,9 +48,9 @@ BuildRequires:  openssl-devel
 BuildRequires:  systemd-devel
 
 # Make sure /usr/share/dbus-1/interfaces and /usr/share/dbus-1 are owned.
-Requires:  dbus-common
+Requires:       dbus-common
 # Weak dependency on documentation
-Recommends:  rauc-doc
+Recommends:     rauc-doc
 
 # Test requirements
 BuildRequires:  dbus-daemon
@@ -64,10 +64,10 @@ BuildRequires:  python3-requests
 BuildRequires:  squashfs-tools
 
 %package doc
-Summary: RAUC documentation
+Summary:        RAUC documentation
 
 # rauc-doc does not contain any binaries
-BuildArch: noarch
+BuildArch:      noarch
 
 # Documentation requirements
 BuildRequires:  make
@@ -132,7 +132,7 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %{_datadir}/dbus-1/interfaces/de.pengutronix.rauc.Installer.xml
 %license COPYING
 %doc README.rst CHANGES
-%{_mandir}/man1/rauc.1.*
+%doc %{_mandir}/man1/rauc.1.*
 
 # docbook for yelp or khelpcenter
 %files doc
@@ -140,6 +140,10 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %doc %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
+* Fri Jun 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-10
+- Mark man page as doc
+- Use same indentation on statements
+
 * Tue Jun 10 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-9
 - Recommend installing separate doc package
 
