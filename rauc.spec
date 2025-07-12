@@ -1,12 +1,8 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease -b 10
+Release:        %autorelease -b 11
 Summary:        Safe and secure software updates for embedded Linux
 
-# License issue in de.pengutronix.rauc.Installer.xml
-# https://github.com/rauc/rauc/issues/1713
-# https://github.com/rauc/rauc/pull/1720
-# Upstream: PR is open and expected to be included in release 1.15
 License:        LGPL-2.1-only AND CC0-1.0
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
@@ -14,6 +10,7 @@ Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{
 # Deprecated OpenSSL engine support
 # https://github.com/rauc/rauc/issues/1688
 # https://github.com/rauc/rauc/pull/1690
+# https://github.com/rauc/rauc/commit/be102bd6d57dcc37c388c9df9a99d093acf43279
 # Upstream: PR has landed and will be included in release 1.15
 Patch0:         rauc_patch0_no_openssl_engine.patch
 
@@ -31,6 +28,14 @@ Patch2:         rauc_patch2_disable_openssl_x509_issue_on_f43.patch
 # Upstream: Fixed in commit "fe86f27 COPYING: remove old FSF postal address"
 #           and will be included in release 1.15
 # https://github.com/rauc/rauc/commit/fe86f277258dfe96d0f9ac9bfa930733598d7160
+Patch3:         rauc_patch3_license_incorrect_fsf_address.patch
+
+# License issue in de.pengutronix.rauc.Installer.xml
+# https://github.com/rauc/rauc/issues/1713
+# https://github.com/rauc/rauc/pull/1720
+# https://github.com/rauc/rauc/commit/99355aa198daf2c0aff7fbf2ba981fd7355047ca
+# Upstream: PR is open and expected to be included in release 1.15
+Patch4:         rauc_patch4_license_issue_xml.patch
 
 # Exclude architectures that does not have grub2-tools-minimal package
 ExcludeArch:    s390 s390x i686
@@ -72,6 +77,7 @@ BuildArch:      noarch
 # Documentation requirements
 BuildRequires:  make
 BuildRequires:  texinfo
+BuildRequires:  thorvg
 BuildRequires:  python3dist(docutils)
 BuildRequires:  python3dist(sphinx)
 BuildRequires:  python3-sphinx_rtd_theme
@@ -94,6 +100,10 @@ Service is not installed as that is only needed on device.
 %patch -P 1 -b .orig
 # OpenSSL X509 test fails on F43/Rawhide (work on F42 and earlier)
 %patch -P 2 -b .orig
+# License incorrect-fsf-address
+%patch -P 3 -b .orig
+# License issue in de.pengutronix.rauc.Installer.xml
+%patch -P 4 -b .orig
 # Debian vs. Fedora grub2 packaging difference
 cd test/bin
 ln -sf grub-editenv grub2-editenv
@@ -104,12 +114,23 @@ ln -sf grub-editenv grub2-editenv
         -Dhtmldocs=false \
         -Dservice=false \
         -Dstreaming=false \
-        -Dnetwork=false
+        -Dnetwork=false \
+        -Dpkcs11_engine=false
 
 %meson_build
 
 # docbook for yelp or khelpcenter
 pushd docs
+# Yelp SVG image workaround
+# https://gitlab.gnome.org/GNOME/yelp/-/issues/92
+pushd images
+# >=F43: tvg-svg2png
+# <=F42: tvg_svg2png
+tvg-svg2png . || tvg_svg2png .
+popd
+sed -i "s/\.svg/\.png/g" *.rst
+tvg-svg2png RAUC_Logo_outline.svg || tvg_svg2png RAUC_Logo_outline.svg
+sed -i "s/html_logo = 'RAUC_Logo_outline.svg'/html_logo = 'RAUC_Logo_outline.png'/g" conf.py
 sphinx-build . texinfo -b texinfo
 pushd texinfo
 makeinfo --docbook %{name}.texi
@@ -132,7 +153,7 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %{_datadir}/dbus-1/interfaces/de.pengutronix.rauc.Installer.xml
 %license COPYING
 %doc README.rst CHANGES
-%doc %{_mandir}/man1/rauc.1.*
+%{_mandir}/man1/rauc.1.*
 
 # docbook for yelp or khelpcenter
 %files doc
@@ -140,6 +161,12 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %doc %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
+* Sat Jul 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-11
+- Don't mark man page as doc
+- Update patches against upstream version
+- Yelp SVG image workaround: Convert SVG to PNG using thorvg
+- thorvg workaround due to command rename in F42/F43
+
 * Fri Jun 13 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-10
 - Mark man page as doc
 - Use same indentation on statements

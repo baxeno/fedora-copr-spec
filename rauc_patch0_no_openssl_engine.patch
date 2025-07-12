@@ -1,10 +1,39 @@
+--- meson.build.orig	2025-04-03 21:27:56.519514909 +0200
++++ meson.build	2025-04-03 21:33:35.030236713 +0200
+@@ -172,6 +172,10 @@
+   sources_rauc += files('src/artifacts_composefs.c')
+ endif
+ 
++# To allow building against OpenSSL 3.0 and 4.0 without engine support
++# as they are deprecated in favor of providers API
++conf.set10('ENABLE_OPENSSL_PKCS11_ENGINE', get_option('pkcs11_engine'))
++
+ gnome = import('gnome')
+ dbus_ifaces = files('src/de.pengutronix.rauc.Installer.xml')
+ dbus_sources = gnome.gdbus_codegen(
+
+--- meson_options.txt.orig	2025-04-03 21:27:56.519514909 +0200
++++ meson_options.txt	2025-04-03 21:33:35.030236713 +0200
+@@ -34,6 +34,11 @@
+   type : 'feature',
+   value : 'disabled',
+   description : 'Enable/Disable composefs artifact installation support')
++option(
++  'pkcs11_engine',
++  type : 'boolean',
++  value : 'true',
++  description : 'Enable/Disable OpenSSL PKCS11 engine support')
+ 
+ # other options
+ option(
+
 --- src/signature.c.orig	2025-04-03 21:27:56.519514909 +0200
 +++ src/signature.c	2025-04-03 21:33:35.030236713 +0200
 @@ -5,7 +5,9 @@
  #include <openssl/evp.h>
  #include <openssl/pem.h>
  #include <openssl/crypto.h>
-+#ifdef USE_OPENSSL_ENGINE
++#if ENABLE_OPENSSL_PKCS11_ENGINE
  #include <openssl/engine.h>
 +#endif
  #include <openssl/x509.h>
@@ -14,7 +43,7 @@
  	return TRUE;
  }
  
-+#ifdef USE_OPENSSL_ENGINE
++#if ENABLE_OPENSSL_PKCS11_ENGINE
  static ENGINE *get_pkcs11_engine(GError **error)
  {
  	static ENGINE *e = NULL;
@@ -30,31 +59,44 @@
  static EVP_PKEY *load_key_pkcs11(const gchar *url, GError **error)
  {
  	EVP_PKEY *res = NULL;
-+#ifdef USE_OPENSSL_ENGINE
++#if ENABLE_OPENSSL_PKCS11_ENGINE
  	GError *ierror = NULL;
  	ENGINE *e;
  
-@@ -243,6 +248,7 @@
+@@ -242,6 +247,14 @@
+ 				"failed to load PKCS11 private key for '%s': %s", url, get_openssl_err_string());
  		goto out;
  	}
- out:
++#else
++	g_set_error(
++			error,
++			R_SIGNATURE_ERROR,
++			R_SIGNATURE_ERROR_LOAD_FAILED,
++			"failed to load PKCS11 private key for '%s': OpenSSL engine support disabled", url);
 +#endif
++
+ out:
  	return res;
  }
- 
-@@ -345,6 +351,7 @@
+@@ -345,6 +358,7 @@
  static X509 *load_cert_pkcs11(const gchar *url, GError **error)
  {
  	X509 *res = NULL;
-+#ifdef USE_OPENSSL_ENGINE
++#if ENABLE_OPENSSL_PKCS11_ENGINE
  	GError *ierror = NULL;
  	ENGINE *e;
  
-@@ -375,6 +382,7 @@
+@@ -374,6 +388,13 @@
+ 		goto out;
  	}
  	res = parms.cert;
- 
++#else
++	g_set_error(
++			error,
++			R_SIGNATURE_ERROR,
++			R_SIGNATURE_ERROR_PARSE_ERROR,
++			"failed to load PKCS11 certificate for '%s': OpenSSL engine support disabled", url);
 +#endif
+ 
  out:
  	return res;
- }

@@ -1,0 +1,9 @@
+--- src/de.pengutronix.rauc.Installer.xml.orig	2025-04-03 21:27:56.519514909 +0200
++++ src/de.pengutronix.rauc.Installer.xml	2025-04-03 21:33:35.030236713 +0200
+@@ -1,5 +1,5 @@
+ <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "https://specifications.freedesktop.org/dbus/introspect-latest.dtd">
+-<!-- License note: This file is considered data and thus no license is needed for any usage. -->
++<!-- SPDX-License-Identifier: CC0-1.0 -->
+ <node>
+   <interface name="de.pengutronix.rauc.Installer">
+     <!--
