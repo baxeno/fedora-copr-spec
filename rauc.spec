@@ -1,9 +1,9 @@
 Name:           rauc
 Version:        1.14
-Release:        %autorelease -b 11
+Release:        %autorelease -b 12
 Summary:        Safe and secure software updates for embedded Linux
 
-License:        LGPL-2.1-only AND CC0-1.0
+License:        LGPL-2.1-or-later AND CC0-1.0
 URL:            https://rauc.io/
 Source0:        https://github.com/rauc/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 
@@ -30,11 +30,12 @@ Patch2:         rauc_patch2_disable_openssl_x509_issue_on_f43.patch
 # https://github.com/rauc/rauc/commit/fe86f277258dfe96d0f9ac9bfa930733598d7160
 Patch3:         rauc_patch3_license_incorrect_fsf_address.patch
 
-# License issue in de.pengutronix.rauc.Installer.xml
+# License issue in de.pengutronix.rauc.Installer.xml and text for CC0-1.0
 # https://github.com/rauc/rauc/issues/1713
 # https://github.com/rauc/rauc/pull/1720
 # https://github.com/rauc/rauc/commit/99355aa198daf2c0aff7fbf2ba981fd7355047ca
-# Upstream: PR is open and expected to be included in release 1.15
+# https://github.com/rauc/rauc/commit/fccfec046497f909a5d872fd45c337b8ebea7050
+# Upstream: PR has landed and will be included in release 1.15
 Patch4:         rauc_patch4_license_issue_xml.patch
 
 # Exclude architectures that does not have grub2-tools-minimal package
@@ -102,7 +103,7 @@ Service is not installed as that is only needed on device.
 %patch -P 2 -b .orig
 # License incorrect-fsf-address
 %patch -P 3 -b .orig
-# License issue in de.pengutronix.rauc.Installer.xml
+# License issue in de.pengutronix.rauc.Installer.xml and text for CC0-1.0
 %patch -P 4 -b .orig
 # Debian vs. Fedora grub2 packaging difference
 cd test/bin
@@ -151,16 +152,22 @@ cp -p -r docs/texinfo/%{name}-figures %{buildroot}%{_datadir}/help/en/%{name}
 %files
 %{_bindir}/rauc
 %{_datadir}/dbus-1/interfaces/de.pengutronix.rauc.Installer.xml
-%license COPYING
+%license COPYING LICENSES/CC0-1.0.txt
 %doc README.rst CHANGES
 %{_mandir}/man1/rauc.1.*
 
 # docbook for yelp or khelpcenter
 %files doc
+%license COPYING
 %dir %{_datadir}/help/en
 %doc %lang(en) %{_datadir}/help/en/%{name}
 
 %changelog
+* Mon Jul 21 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-12
+- Update patch 4 with CC0-1.0.txt and include it in rauc %license
+- Add COPYING to rauc-doc %license
+- Fix license as LGPL-2.1-or-later not LGPL-2.1-only
+
 * Sat Jul 12 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 1.14-11
 - Don't mark man page as doc
 - Update patches against upstream version
