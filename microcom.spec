@@ -1,5 +1,5 @@
 Name:           microcom
-Version:        2023.09.0
+Version:        2025.11.0
 Release:        %autorelease
 Summary:        minimalistic terminal program
 
@@ -35,7 +35,10 @@ serial interfaces (including setting of transfer-rates) as well as in
 %{_mandir}/man1/microcom.1.*
 
 %changelog
-* Wed May 21 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 2023.09.0-1
+* Mon Dec 08 2025  Bruno Thomsen <bruno.thomsen@gmail.com> - 2025.11.0-1
+- Version bumped from 2023.09.0 to 2025.11.0
+
+* Wed May 21 2025 Bruno Thomsen <bruno.thomsen@gmail.com> - 2023.09.0-2
 - Use macros in files section
 - Minor spec file cleanup
 
