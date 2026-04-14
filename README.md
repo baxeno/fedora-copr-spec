@@ -11,45 +11,8 @@ So I can add them to the main repository as well as maintain some orphan package
   - Currently Labgrid installation steps only work for Debian as microcom is required by labgrid-client.
   - So currently it is not very straight forward to also provide Fedora installation steps 🙁
 
-- [Fedora COPR bax/rauc](https://copr.fedorainfracloud.org/coprs/bax/rauc/) needed for handling RAUC upgrade bundles for embedded Linux devices.
-  - [rauc.spec](rauc.spec)
-  - RAUC cli tool can be very useful after an upgrade bundle has been build but not yet released to the wild 🐧
-  - resign bundle with new digital signature, e.g. developer signed vs. official signed.
-  - inspect bundle meta data or files inside.
-  - Service is only needed on target device.
-  - Fedora is missing from the list of development/build hosts (Arch, Debian, Ubuntu, NixOS already have package) 🙁
-
-Fedora 40, 41, 42:
-
-```
-――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-Ok:                 35
-Expected Fail:      0
-Fail:               0
-Unexpected Pass:    0
-Skipped:            3
-Timeout:            0
-```
-
-Fedora 43 (rawhide):
-
-```
-――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-Summary of Failures:
-
- 6/38 config_file              ERROR            0.15s   killed by signal 5 SIGTRAP
- 7/38 context                  ERROR            0.16s   killed by signal 5 SIGTRAP
- 9/38 event_log                ERROR            0.14s   killed by signal 5 SIGTRAP
-15/38 signature                ERROR            0.08s   killed by signal 5 SIGTRAP
-18/38 status_file              ERROR            0.13s   killed by signal 5 SIGTRAP
-
-Ok:                 30
-Expected Fail:      0
-Fail:               5
-Unexpected Pass:    0
-Skipped:            3
-Timeout:            0
-```
+- [Fedora rauc](https://src.fedoraproject.org/rpms/rauc) needed for handling RAUC upgrade bundles for embedded Linux devices.
+  - Upstream ☺️
 
 - [Fedora COPR bax/uuu](https://copr.fedorainfracloud.org/coprs/bax/uuu/) needed for manufacturing of embedded Linux devices with NXP i.MX SoC.
   - [uuu.spec](uuu.spec)
